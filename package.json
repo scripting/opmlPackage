@@ -1,0 +1,12 @@
+{
+	"name": "opml",
+	"description": "Node and browser-based code that helps developers support OPML in outliners, processors and renderers.",
+	"version": "0.4.1",
+	"main": "opmlpackage.js",
+	"dependencies" : {
+		"request": "*",
+		"xml2js": "*",
+		"daveutils": "*",
+		"opmltojs": "*"
+		} 
+	}
