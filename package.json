@@ -1,7 +1,16 @@
 {
 	"name": "opml",
 	"description": "Node and browser-based code that helps developers support OPML in outliners, processors and renderers.",
-	"version": "0.4.1",
+	"author": "Dave Winer <dave@scripting.com>",
+	"version": "0.4.4",
+	"license": "MIT",
+	"repository": {
+		"type": "git",
+		"url": "https://github.com/scripting/opmlpackage.git"
+		},
+	"files": [
+		"opmlpackage.js"
+		],
 	"main": "opmlpackage.js",
 	"dependencies" : {
 		"request": "*",
