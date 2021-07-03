@@ -6,7 +6,7 @@ Node and browser-based code that helps developers support OPML in outliners, pro
 
 To parse a local OPML file:
 
-<code>
+```
 
 const fs = require ("fs");
 
@@ -32,7 +32,7 @@ console.log (JSON.stringify (theOutline, undefined, 4));
 
 });
 
-</code>
+```
 
 ### Using the client code
 
