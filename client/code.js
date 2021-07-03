@@ -13,6 +13,64 @@
 	//Visit every node in the outline, and convert the text to upper case.
 const urlOpmlFile = "http://drummer.scripting.com/davewiner/states.opml";
 
+function filledString (ch, ct) { //6/4/14 by DW
+	var s = "";
+	for (var i = 0; i < ct; i++) {
+		s += ch;
+		}
+	return (s);
+	}
+function encodeXml (s) { //7/15/14 by DW
+	//Changes
+		//12/14/15; 4:28:14 PM by DW
+			//Check for undefined, return empty string.
+	if (s === undefined) {
+		return ("");
+		}
+	else {
+		var charMap = {
+			'<': '&lt;',
+			'>': '&gt;',
+			'&': '&amp;',
+			'"': '&'+'quot;'
+			};
+		s = s.toString();
+		s = s.replace(/\u00A0/g, " ");
+		var escaped = s.replace(/[<>&"]/g, function(ch) {
+			return charMap [ch];
+			});
+		return escaped;
+		}
+	}
+function readHttpFile (url, callback, timeoutInMilliseconds, headers) { //5/27/14 by DW
+	//Changes
+		//7/17/15; 10:43:16 AM by DW
+			//New optional param, headers.
+		//12/14/14; 5:38:18 PM by DW
+			//Add optional timeoutInMilliseconds param.
+		//5/29/14; 11:13:28 AM by DW
+			//On error, call the callback with an undefined parameter.
+		//5/27/14; 8:31:21 AM by DW
+			//Simple asynchronous file read over http.
+	if (timeoutInMilliseconds === undefined) {
+		timeoutInMilliseconds = 30000;
+		}
+	var jxhr = $.ajax ({ 
+		url: url,
+		dataType: "text", 
+		headers: headers,
+		timeout: timeoutInMilliseconds 
+		}) 
+	.success (function (data, status) { 
+		callback (data);
+		}) 
+	.error (function (status) { 
+		//for info about timeous see this page.
+			//http://stackoverflow.com/questions/3543683/determine-if-ajax-error-is-a-timeout
+		console.log ("readHttpFile: url == " + url + ", error == " + jsonStringify (status));
+		callback (undefined);
+		});
+	}
 function startup () {
 	console.log ("startup");
 	readHttpFile (urlOpmlFile, function (opmltext) {

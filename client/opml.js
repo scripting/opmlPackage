@@ -5,6 +5,64 @@ const opml = {
 	visitAll: visitAll
 	};
 
+function xmlCompile (xmltext) { //3/27/17 by DW
+	return ($($.parseXML (xmltext)));
+	}
+function xmlGatherAttributes (adrx, theTable) {
+	if (adrx.attributes != undefined) {
+		for (var i = 0; i < adrx.attributes.length; i++) {
+			var att = adrx.attributes [i];
+			if (att.specified) {
+				theTable [att.name] = att.value;
+				}
+			}
+		}
+	}
+function xmlGetAddress (adrx, name) {
+	return (adrx.find (name));
+	}
+function xmlGetSubValues (adrx) { //10/12/16 by DW
+	//Changes
+		//10/12/16; 11:25:15 AM by DW
+			//Return a JS object with the values of all the sub-elements of adrx.
+	var values = new Object ();
+	$(adrx).children ().each (function () {
+		var name = xmlGetNodeNameProp (this);
+		if (name.length > 0) {
+			var val = $(this).prop ("textContent");
+			//name = "opml" + string.upper (name [0]) + string.mid (name, 2, name.length - 1);
+			values [name] = val;
+			}
+		});
+	return (values);
+	}
+function xmlGetNodeNameProp (adrx) { //12/10/13 by DW
+	return ($(adrx).prop ("nodeName"));
+	}
+function xmlHasSubs (adrx) {
+	return ($(adrx).children ().length > 0); //use jQuery to get answer -- 12/30/13 by DW
+	};
+function outlineToJson (adrx, nameOutlineElement) { //12/25/20 by DW
+	//Changes
+		//12/25/20; 11:48:29 AM by DW
+			//I was replicating this all over the place, there should be a copy here.
+			//adrx points to the <body> of the outline. we return a javascript object with the contents of the body.
+		//10/20/14; 5:54:44 PM by DW
+			//Convert a <source:outline> structure from an RSS item into a jstruct.
+	var theOutline = new Object ();
+	if (nameOutlineElement === undefined) {
+		nameOutlineElement = "outline";
+		}
+	xmlGatherAttributes (adrx, theOutline);
+	if (xmlHasSubs (adrx)) {
+		theOutline.subs = [];
+		$(adrx).children (nameOutlineElement).each (function () {
+			theOutline.subs [theOutline.subs.length] = outlineToJson (this, nameOutlineElement);
+			});
+		}
+	return (theOutline);
+	}
+
 function opmlParse (opmltext) {
 	//Changes
 		//6/13/21; 9:49:51 AM by DW
