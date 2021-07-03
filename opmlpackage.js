@@ -1,19 +1,15 @@
-const myVersion = "0.4.4", myProductName = "opmlPackage"; 
+const myVersion = "0.4.5", myProductName = "opmlPackage"; 
 
 exports.parse = parse; 
 exports.stringify = stringify; 
+exports.htmlify = getOutlineHtml; 
+exports.visitAll = visitAll; 
 
 const utils = require ("daveutils");
 const opmltojs = require ("opmltojs");
 const xml2js = require ("xml2js");
 const opmlToJs = require ("opmltojs");
 
-function isScalar (obj) {
-	if (typeof (obj) == "object") {
-		return (false);
-		}
-	return (true);
-	}
 function parse (opmltext, callback) { //returns a JavaScript object with all the info in the opmltext
 	//Changes
 		//1/18/21; 10:21:27 AM by DW
@@ -21,6 +17,12 @@ function parse (opmltext, callback) { //returns a JavaScript object with all the
 		//4/18/20; 5:43:20 PM by DW
 			//Changed the callback to return the standard format, with an err first, and theOutline second. 
 			//I didn't want to break all the apps that use this as it was configured, but in the future, use this entry point not the one without the error.
+	function isScalar (obj) {
+		if (typeof (obj) == "object") {
+			return (false);
+			}
+		return (true);
+		}
 	function addGenerator (theOpml) { //follow the example of RSS 2.0
 		try {
 			theOpml.head.generator = myProductName + " v" + myVersion;
@@ -113,4 +115,37 @@ function parse (opmltext, callback) { //returns a JavaScript object with all the
 function stringify (theOutline) { //returns the opmltext for the outline
 	var opmltext = opmlToJs.opmlify (theOutline);
 	return (opmltext);
+	}
+function getOutlineHtml (theOutline) {
+	var htmltext = ""; indentlevel = 0;
+	function add (s) {
+		htmltext += filledString ("\t", indentlevel) + s + "\n";
+		}
+	function addSubsHtml (node) {
+		add ("<ul>"); indentlevel++;
+		node.subs.forEach (function (sub) {
+			add ("<li>" + sub.text + "</li>");
+			if (sub.subs !== undefined) {
+				addSubsHtml (sub);
+				}
+			});
+		add ("</ul>"); indentlevel--;
+		}
+	addSubsHtml (theOutline.opml.body);
+	return (htmltext);
+	}
+function visitAll (theOutline, callback) {
+	function visitSubs (theNode) {
+		if (theNode.subs !== undefined) {
+			for (var i = 0; i < theNode.subs.length; i++) {
+				var theSub = theNode.subs [i];
+				if (!callback (theSub)) {
+					return (false);
+					}
+				visitSubs (theSub);
+				}
+			}
+		return (true);
+		}
+	visitSubs (theOutline.opml.body);
 	}

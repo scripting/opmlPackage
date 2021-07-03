@@ -1,3 +1,10 @@
+const opml = {
+	parse: opmlParse,
+	stringify: opmlStringify,
+	htmlify: getOutlineHtml,
+	visitAll: visitAll
+	};
+
 function opmlParse (opmltext) {
 	//Changes
 		//6/13/21; 9:49:51 AM by DW
@@ -71,4 +78,19 @@ function getOutlineHtml (theOutline) {
 		}
 	addSubsHtml (theOutline.opml.body);
 	return (htmltext);
+	}
+function visitAll (theOutline, callback) {
+	function visitSubs (theNode) {
+		if (theNode.subs !== undefined) {
+			for (var i = 0; i < theNode.subs.length; i++) {
+				var theSub = theNode.subs [i];
+				if (!callback (theSub)) {
+					return (false);
+					}
+				visitSubs (theSub);
+				}
+			}
+		return (true);
+		}
+	visitSubs (theOutline.opml.body);
 	}

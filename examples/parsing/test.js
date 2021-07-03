@@ -1,15 +1,16 @@
-//Read and write an OPML file from a file.
+//7/3/21; 3:27:01 PM by DW
+	//Read and write an OPML file from a file.
 	//Also display:
-		//the outline's title from the head section and 
-		//the text of the third child of the second top level subhead of the United States.
-	//Illustrates how you read data from the compiled structure.
-	//The point is, once you've compiled the OPML, you process it as if it were read by JSON.parse.
-	//And when you're done, you serialize it with opml.stringify. 
-	//By design, works exactly like JSON, so every JS programmer should find this familiar. 
-	//7/3/21; 11:36:22 AM by DW
+		//The outline's title from the head section and 
+		//The text of the third child of the second top level subhead of the United States.
+		//Illustrates how you get data from the compiled structure.
+		//Once you've compiled the OPML, you process it as a JavaScript object.
+		//When you're done, you can serialize it with opml.stringify. 
+		//By design, works like JSON, so every JS programmer should find this familiar. 
+	//Visit every node in the outline, and convert the text to upper case.
+		//Display OPML text of the uppercased outline in the console.
 
 const fs = require ("fs");
-//const utils = require ("daveutils");
 const opml = require ("opml");
 
 fs.readFile ("states.opml", function (err, opmltext) {
@@ -36,7 +37,11 @@ fs.readFile ("states.opml", function (err, opmltext) {
 					console.log ("statescopy.opml was saved.");
 					}
 				});
+			opml.visitAll (theOutline, function (node) {
+				node.text = node.text.toUpperCase ();
+				return (true); //keep visiting
+				});
+			console.log (opml.stringify (theOutline)); //view the uppercased outline in the JS console
 			});
 		}
 	});
-
