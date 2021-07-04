@@ -1,6 +1,6 @@
-# opmlPackage
+# opml
 
-Node and browser code that reads and writes OPML.
+JavaScript code that reads and writes OPML.
 
 #### What is OPML and why should we use it?
 

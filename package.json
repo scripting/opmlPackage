@@ -2,7 +2,7 @@
 	"name": "opml",
 	"description": "Node and browser code that helps developers support OPML in outliners, processors and renderers.",
 	"author": "Dave Winer <dave@scripting.com>",
-	"version": "0.4.7",
+	"version": "0.4.8",
 	"license": "MIT",
 	"repository": {
 		"type": "git",
