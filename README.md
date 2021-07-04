@@ -1,6 +1,6 @@
 # opml package
 
-Node and browser-based JavaScript code that reads and writes OPML.
+A developer's toolkit for OPML support. Node and browser-based JavaScript code that reads and writes OPML.
 
 #### What is OPML and why should we use it?
 
@@ -9,6 +9,8 @@ OPML is an XML-based format designed to store outline-based information.
 It's been around since the early 2000s, and is widely used in the RSS world to exchange subscription lists. 
 
 It's also a standard for interop among outliners. If you support OPML, our products will interop, and our users will be able to use each others' products. 
+
+I recorded a <a href="http://scripting.com/2021/07/04/myPitchForOpml.m4a">podcast</a> explaining all this. :-)
 
 #### Why this package?
 
@@ -48,9 +50,9 @@ The example app includes the Bootstrap Toolkit, the Ubuntu font and jQuery. The 
 
 I have a few OPML-related projects on GitHub and on the web. 
 
-* instantOutliner -- Example code for sharing live-updated outlines between users, using websockets as the notification system.
+* <a href="https://github.com/scripting/instantOutlines">instantOutlines</a> -- Example code for sharing live-updated outlines between users, using websockets as the notification system.
 
-* Drummer -- browser and Electron-based outliner that uses OPML as its native format. Not released yet as of July 2021.
+* Drummer -- Browser and Electron-based outliner that uses OPML as its native format. Not released as of July 2021.
 
 * etc.
 
