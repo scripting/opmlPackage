@@ -8,9 +8,7 @@ OPML is an XML-based format designed to store outline-based information.
 
 It's been around since the early 2000s, and is widely used in the RSS world to exchange subscription lists. 
 
-It's also a standard for interop among outliners. If you support OPML, our products will interop, and our users will be able to use each others' products. 
-
-I recorded a <a href="http://scripting.com/2021/07/04/myPitchForOpml.m4a">podcast</a> explaining all this. :-)
+It's also a standard for interop among outliners. If you support OPML, our products will interop, and our users will be able to use all our products on their data. 
 
 #### Why this package?
 
@@ -19,6 +17,8 @@ I wanted to make it really easy for developers to add basic OPML support to thei
 So I put the basic code you need to read and write OPML files, code that's debugged, used in other apps, including my own. It's known to work, to respect the format, and be easy to deploy.
 
 There are other ways to read OPML, and that's very good. The more support there is, the more interop and that's the goal. I'm going to accumulate links to resources for OPML developers. If you have something you think they could use, send me an email at the address in the package.json file above. 
+
+I recorded a <a href="http://scripting.com/2021/07/04/myPitchForOpml.m4a">podcast</a> explaining all this. :-)
 
 #### What's in this package?
 
