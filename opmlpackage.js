@@ -1,4 +1,4 @@
-const myVersion = "0.4.6", myProductName = "opmlPackage"; 
+const myVersion = "0.4.7", myProductName = "opmlPackage"; 
 
 exports.parse = parse; 
 exports.stringify = stringify; 

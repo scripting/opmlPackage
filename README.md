@@ -10,17 +10,27 @@ It's been around since the early 2000s, and is widely used in the RSS world to e
 
 It's also a standard for interop among outliners. If you support OPML, our products will interop, and our users will be able to use each others' products. 
 
+#### Why this package?
+
+I wanted to make it really easy for developers to add basic OPML support to their apps.
+
+So I put the basic code you need to read and write OPML files, code that's debugged, used in other apps, including my own. It's known to work, to respect the format, and be easy to deploy.
+
+There are other ways to read OPML, and that's very good. The more support there is, the more interop and that's the goal. I'm going to accumulate links to resources for OPML developers. If you have something you think they could use, send me an email at the address in the package.json file above. 
+
 #### What's in this package?
 
 JavaScript code to parse and stringify OPML.
 
+There are a few extras, including a simple routine to display outlines in HTML, and a routine that visits all the nodes in an outline. 
+
 #### The Node package
 
-It's on NPM, it's called OPML.
+It's on <a href="https://www.npmjs.com/package/opml">NPM</a>, it's called OPML.
 
 Here's a snippet that reads an OPML file, converts it to a JavaScript object, displays it to the console via JSON.stringify.
 
-```javascriptfs.readFile ("states.opml", function (err, opmltext) {	if (!err) {		opml.parse (opmltext, function (err, theOutline) {			if (!err) {				console.log (JSON.stringify (theOutline, undefined, 4));				}			});		}	});```
+```javascriptconst fs = require ("fs");const opml = require ("opml");fs.readFile ("states.opml", function (err, opmltext) {	if (!err) {		opml.parse (opmltext, function (err, theOutline) {			if (!err) {				console.log (JSON.stringify (theOutline, undefined, 4));				}			});		}	});```
 
 The full Node example is <a href="https://github.com/scripting/opmlPackage/blob/main/examples/parsing/test.js">here</a>. 
 
@@ -29,6 +39,8 @@ The full Node example is <a href="https://github.com/scripting/opmlPackage/blob/
 The same routines are available for JavaScript code running in the browser. 
 
 See the <a href="https://github.com/scripting/opmlPackage/tree/main/client">example</a>. You have to include <a href="https://github.com/scripting/opmlPackage/blob/main/client/opml.js">opml.js</a> in your app, as the example does. 
+
+The example app includes the Bootstrap Toolkit and jQuery. The OPML parsing and generating code does not depend on them, they're just used in the example app. opml.js should be completely self-contained, i.e. it does not depend on any other files.
 
 #### Questions, comments?
 
