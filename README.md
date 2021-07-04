@@ -22,9 +22,15 @@ I recorded a <a href="http://scripting.com/2021/07/04/myPitchForOpml.m4a">podcas
 
 #### What's in this package?
 
-JavaScript code to parse and stringify OPML.
+JavaScript code to parse and stringify OPM, and a couple of extras.
 
-There are a few extras, including a simple routine to display outlines in HTML, and a routine that visits all the nodes in an outline. 
+* opml.parse -- turns OPML text into a JavaScript structure representing the OPML.
+
+* opml.stringify -- takes the JavaScript structure and turns it into OPML text.
+
+* opml.htmlify -- a simple routine to display outlines in HTM.
+
+* opml.visitAll -- a routine that visits all the nodes in an outline.
 
 #### The Node package
 
