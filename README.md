@@ -2,7 +2,7 @@
 
 Node and browser code that reads and writes OPML.
 
-### What is OPML and why should we use it?
+#### What is OPML and why should we use it?
 
 OPML is an XML-based format designed to store outline-based information. 
 
@@ -10,11 +10,11 @@ It's been around since the early 2000s, and is widely used in the RSS world to e
 
 It's also a standard for interop among outliners. If you support OPML, our products will interop, and our users will be able to use each others' products. 
 
-### What's in this package?
+#### What's in this package?
 
 JavaScript code to parse and stringify OPML.
 
-### The Node package
+#### The Node package
 
 It's on NPM, it's called OPML.
 
@@ -24,13 +24,13 @@ Here's a snippet that reads an OPML file, converts it to a JavaScript object, di
 
 The full Node example is <a href="https://github.com/scripting/opmlPackage/blob/main/examples/parsing/test.js">here</a>. 
 
-### OPML in the browser
+#### OPML in the browser
 
 The same routines are available for JavaScript code running in the browser. 
 
 See the <a href="https://github.com/scripting/opmlPackage/tree/main/client">example</a>. You have to include <a href="https://github.com/scripting/opmlPackage/blob/main/client/opml.js">opml.js</a> in your app, as the example does. 
 
-### Questions, comments?
+#### Questions, comments?
 
-If you have any questions or comments please post an issue here. 
+If you have any questions or comments please post an issue <a href="https://github.com/scripting/opmlPackage/issues">here</a>. 
 
