@@ -1,6 +1,6 @@
 body {
 	font-family: Ubuntu;
-	font-size: 18px;
+	font-size: 16px;
 	background-color: whitesmoke;
 	}
 .divPageBody {
@@ -12,32 +12,19 @@ body {
 	}
 p {
 	line-height: 140%;
+	margin-bottom: 15px;
 	}
 
-.divOutlineViewer {
+.divOutlineViewer, .divJsonViewer,  .divOpmlViewer {
 	margin-top: 15px;
 	padding: 3px;
 	border: 1px solid silver;
-	font-size: 16px;
-	}
-.divOutlineViewer ul {
-	list-style-type: circle;
 	}
 .divOutlineViewer li {
 	padding-top: 3px;
 	padding-bottom: 3px;
 	}
+.divOutlineViewer ul {
+	list-style-type: circle;
+	}
 
-.divHeadElementsViewer {
-	margin-top: 15px;
-	border: 1px solid silver;
-	font-size: 16px;
-	}
-.divHeadElementsViewer td {
-	vertical-align: top;
-	padding: 3px;
-	font-size: 16px;
-	}
-.divHeadElementsViewer .tdright {
-	text-align: right;
-	}

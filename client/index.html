@@ -5,17 +5,20 @@
 		<meta name="viewport" content="width=device-width, initial-scale=1.0">
 		<script src="http://scripting.com/code/includes/jquery-1.9.1.min.js"></script>
 		<link href="http://scripting.com/code/includes/bootstrap.css" rel="stylesheet">
+		<link href="//fonts.googleapis.com/css?family=Ubuntu:400,500i,700" rel="stylesheet">
 		<script src="opml.js"></script>
 		<script src="code.js"></script>
 		<link rel="stylesheet" href="styles.css" type="text/css">
 		</head>
 	<body>
 		<div class="divPageBody">
-			<pre class="divJsonViewer" id="idJsonViewer">
+			<h1>OPML client demo</h1>
+			<p>We display the States outline as a <a href="#json">JavaScript</a> object, a simple <a href="#html">HTML</a> rendering and as an <a href="#opml">OPML</a> file.</p>
+			<a name="json"></a><pre class="divJsonViewer" id="idJsonViewer">
 				</pre>
-			<div class="divOutlineViewer" id="idOutlineViewer">
+			<a name="html"></a><div class="divOutlineViewer" id="idOutlineViewer">
 				</div>
-			<pre id="idOpmlViewer">
+			<a name="opml"></a><pre class="divOpmlViewer" id="idOpmlViewer">
 				</pre>
 			</div>
 		<script>

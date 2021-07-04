@@ -40,7 +40,19 @@ The same routines are available for JavaScript code running in the browser.
 
 See the <a href="https://github.com/scripting/opmlPackage/tree/main/client">example</a>. You have to include <a href="https://github.com/scripting/opmlPackage/blob/main/client/opml.js">opml.js</a> in your app, as the example does. 
 
-The example app includes the Bootstrap Toolkit and jQuery. The OPML parsing and generating code does not depend on them, they're just used in the example app. opml.js should be completely self-contained, i.e. it does not depend on any other files.
+You can <a href="http://scripting.com/code/opmlpackage/client/index.html">run the example</a> right now, without downloading the repo.
+
+The example app includes the Bootstrap Toolkit, the Ubuntu font and jQuery. The OPML parsing and generating code does not depend on them, they're just used in the example app. opml.js should be completely self-contained, i.e. it does not depend on any other files.
+
+#### Other OPML projects
+
+I have a few OPML-related projects on GitHub and on the web. 
+
+* instantOutliner -- Example code for sharing live-updated outlines between users, using websockets as the notification system.
+
+* Drummer -- browser and Electron-based outliner that uses OPML as its native format. Not released yet as of July 2021.
+
+* etc.
 
 #### Questions, comments?
 
