@@ -22,13 +22,13 @@ I recorded a <a href="http://scripting.com/2021/07/04/myPitchForOpml.m4a">podcas
 
 #### What's in this package?
 
-JavaScript code to parse and stringify OPM, and a couple of extras.
+JavaScript code to parse and stringify OPML.
 
 * opml.parse -- turns OPML text into a JavaScript structure representing the OPML.
 
 * opml.stringify -- takes the JavaScript structure and turns it into OPML text.
 
-* opml.htmlify -- a simple routine to display outlines in HTM.
+* opml.htmlify -- a simple routine to display outlines in HTML.
 
 * opml.visitAll -- a routine that visits all the nodes in an outline.
 
@@ -50,7 +50,7 @@ See the <a href="https://github.com/scripting/opmlPackage/tree/main/client">exam
 
 You can <a href="http://scripting.com/code/opmlpackage/client/index.html">run the example</a> right now, without downloading the repo.
 
-The example app includes the Bootstrap Toolkit, the Ubuntu font and jQuery. The OPML parsing and generating code does not depend on them, they're just used in the example app. opml.js should be completely self-contained, i.e. it does not depend on any other files.
+The example app includes the Bootstrap Toolkit, the Ubuntu font and jQuery. The OPML parsing and generating code does not depend on the first two, they're just used in the example app. opml.js uses jQuery, but otherwise should be completely self-contained, i.e. it does not depend on any other files.
 
 #### Other OPML projects
 
@@ -58,7 +58,11 @@ I have a few OPML-related projects on GitHub and on the web.
 
 * <a href="https://github.com/scripting/instantOutlines">instantOutlines</a> -- Example code for sharing live-updated outlines between users, using websockets as the notification system.
 
-* Drummer -- Browser and Electron-based outliner that uses OPML as its native format. Not released as of July 2021.
+* <a href="http://this.how/opmlChecklist/">OPML Developer checklist</a>. Examples, source code and advice for people adapting outliners to read and write OPML.
+
+* <a href="http://dev.opml.org/spec2.html">OPML 2.0 spec</a>.
+
+* Drummer -- Browser and Electron-based outliner that uses OPML as its native format. Coming soon, but not released as of July 2021.
 
 * etc.
 
