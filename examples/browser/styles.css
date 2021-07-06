@@ -5,14 +5,18 @@ body {
 	}
 .divPageBody {
 	width: 60%;
-	margin-top: 50px;
+	margin-top: 30px;
 	margin-left: auto;
 	margin-right: auto;
 	margin-bottom: 400px;
 	}
-p {
+.divPageBody h1 {
+	margin-top: 20px;
+	margin-bottom: 20px;
+	}
+.divPageBody p {
 	line-height: 140%;
-	margin-bottom: 15px;
+	margin-bottom: 25px;
 	}
 
 .divOutlineViewer, .divJsonViewer,  .divOpmlViewer {

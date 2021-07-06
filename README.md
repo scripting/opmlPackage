@@ -46,11 +46,11 @@ The full Node example is <a href="https://github.com/scripting/opmlPackage/blob/
 
 The same routines are available for JavaScript code running in the browser. 
 
-See the <a href="https://github.com/scripting/opmlPackage/tree/main/client">example</a>. You have to include <a href="https://github.com/scripting/opmlPackage/blob/main/client/opml.js">opml.js</a> in your app, as the example does. 
+See the <a href="https://github.com/scripting/opmlPackage/tree/main/client">example</a>. You have to include <a href="e/blob/main/client/opml.js">opml.js</a> in your app, as the example does. 
 
-You can <a href="http://scripting.com/code/opmlpackage/client/index.html">run the example</a> right now, without downloading the repo.
+You can <a href="http://scripting.com/code/opmlpackage/examples/browser/">run the example</a> right now, without downloading the repo.
 
-The example app includes the Bootstrap Toolkit, the Ubuntu font and jQuery. The OPML parsing and generating code does not depend on the first two, they're just used in the example app. opml.js uses jQuery, but otherwise should be completely self-contained, i.e. it does not depend on any other files.
+The <a href="https://github.com/scripting/opmlPackage/tree/main/examples/browser">example app</a> includes the Bootstrap Toolkit, the Ubuntu font and jQuery. The OPML parsing and generating code does not depend on the first two, they're just used in the example app. opml.js uses jQuery, but otherwise should be completely self-contained, i.e. it does not depend on any other files.
 
 #### Other OPML projects
 

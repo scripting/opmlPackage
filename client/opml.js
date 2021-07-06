@@ -44,9 +44,6 @@ function xmlHasSubs (adrx) {
 	};
 function outlineToJson (adrx, nameOutlineElement) { //12/25/20 by DW
 	//Changes
-		//12/25/20; 11:48:29 AM by DW
-			//I was replicating this all over the place, there should be a copy here.
-			//adrx points to the <body> of the outline. we return a javascript object with the contents of the body.
 		//10/20/14; 5:54:44 PM by DW
 			//Convert a <source:outline> structure from an RSS item into a jstruct.
 	var theOutline = new Object ();
