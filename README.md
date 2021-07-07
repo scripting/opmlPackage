@@ -4,9 +4,9 @@ A developer's toolkit for OPML support. Node and browser-based JavaScript code t
 
 #### What is OPML and why should we use it?
 
-OPML is an XML-based format designed to store outlines with attributes. 
+OPML is an XML-based format designed to store and exchange outlines with attributes. 
 
-It's been around since the early 2000s, and is widely used in the RSS world to exchange subscription lists. 
+It's been around since the <a href="http://scripting.com/davenet/2000/09/24/opml10.html">early 2000s</a>, and is widely used in the RSS world to exchange subscription lists. 
 
 It's also a standard for interop among outliners. If you support OPML, our products will interop, and our users will be able to use all our products on their data. 
 
