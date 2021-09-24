@@ -156,16 +156,33 @@ function readOutline (urlOpmlFile, options, callback) { //9/24/21 by DW
 		//9/24/21; 1:51:52 PM by DW
 			//Read the outline over HTTP. If options.flSubscribe is present and true, we set up a websockets connection if the outline supports it, and calll back when it updates.
 	var mySocket = undefined, urlSocketServer;
+	function beginsWith (s, possibleBeginning, flUnicase) { 
+		if (s === undefined) { //7/15/15 by DW
+			return (false);
+			}
+		if (s.length == 0) { //1/1/14 by DW
+			return (false);
+			}
+		if (flUnicase === undefined) {
+			flUnicase = true;
+			}
+		if (flUnicase) {
+			for (var i = 0; i < possibleBeginning.length; i++) {
+				if (stringLower (s [i]) != stringLower (possibleBeginning [i])) {
+					return (false);
+					}
+				}
+			}
+		else {
+			for (var i = 0; i < possibleBeginning.length; i++) {
+				if (s [i] != possibleBeginning [i]) {
+					return (false);
+					}
+				}
+			}
+		return (true);
+		}
 	function readHttpFile (url, timeoutInMilliseconds, headers, callback) { 
-		//Changes
-			//7/17/15; 10:43:16 AM by DW
-				//New optional param, headers.
-			//12/14/14; 5:38:18 PM by DW
-				//Add optional timeoutInMilliseconds param.
-			//5/29/14; 11:13:28 AM by DW
-				//On error, call the callback with an undefined parameter.
-			//5/27/14; 8:31:21 AM by DW
-				//Simple asynchronous file read over http.
 		if (timeoutInMilliseconds === undefined) {
 			timeoutInMilliseconds = 5000;
 			}
