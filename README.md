@@ -66,6 +66,18 @@ I have a few OPML-related projects on GitHub and on the web.
 
 * etc.
 
+#### Updates
+
+#### v0.4.10 -- 9/24/21 by DW
+
+New entry-point in the <a href="https://github.com/scripting/opmlPackage/blob/main/client/opml.js">client</a>, opml.read. 
+
+Reads an OPML file, returns a JavaScript object with the outline head and structure.
+
+If options.flSubscribe is true, we ask to be notified when the file changes over a websocket. 
+
+We call back to the same routine we called when the file was read, assuming it will do the same thing with the updated OPML.
+
 #### Questions, comments?
 
 If you have any questions or comments please post an issue <a href="https://github.com/scripting/opmlPackage/issues">here</a>. 

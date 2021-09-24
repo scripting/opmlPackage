@@ -2,6 +2,7 @@ const opml = {
 	parse: opmlParse,
 	stringify: opmlStringify,
 	htmlify: getOutlineHtml,
+	read: readOutline, //9/24/21 by DW
 	visitAll: visitAll
 	};
 
@@ -148,4 +149,84 @@ function visitAll (theOutline, callback) {
 		return (true);
 		}
 	visitSubs (theOutline.opml.body);
+	}
+
+function readOutline (urlOpmlFile, options, callback) { //9/24/21 by DW
+	//Changes
+		//9/24/21; 1:51:52 PM by DW
+			//Read the outline over HTTP. If options.flSubscribe is present and true, we set up a websockets connection if the outline supports it, and calll back when it updates.
+	var mySocket = undefined, urlSocketServer;
+	function readHttpFile (url, timeoutInMilliseconds, headers, callback) { 
+		//Changes
+			//7/17/15; 10:43:16 AM by DW
+				//New optional param, headers.
+			//12/14/14; 5:38:18 PM by DW
+				//Add optional timeoutInMilliseconds param.
+			//5/29/14; 11:13:28 AM by DW
+				//On error, call the callback with an undefined parameter.
+			//5/27/14; 8:31:21 AM by DW
+				//Simple asynchronous file read over http.
+		if (timeoutInMilliseconds === undefined) {
+			timeoutInMilliseconds = 5000;
+			}
+		if (headers === undefined) {
+			headers = new Object ();
+			}
+		var jxhr = $.ajax ({ 
+			url: url,
+			dataType: "text", 
+			headers: headers,
+			timeout: timeoutInMilliseconds 
+			}) 
+		.success (function (data, status) { 
+			callback (undefined, data);
+			}) 
+		.error (function (status) { 
+			callback (status);
+			});
+		}
+	function wsWatchForChange () { //connect with socket server, if not already connected
+		if (mySocket === undefined) {
+			mySocket = new WebSocket (urlSocketServer); 
+			mySocket.onopen = function (evt) {
+				var msg = "watch " + urlOpmlFile;
+				mySocket.send (msg);
+				console.log ("wsWatchForChange: socket is open. sent msg == " + msg);
+				};
+			mySocket.onmessage = function (evt) {
+				var s = evt.data;
+				if (s !== undefined) { //no error
+					const updatekey = "update\r";
+					if (beginsWith (s, updatekey)) { //it's an update
+						var opmltext = stringDelete (s, 1, updatekey.length);
+						console.log ("wsWatchForChange: update received along with " + opmltext.length + " chars of OPML text.");
+						callback (undefined, opmlParse (opmltext));
+						}
+					}
+				};
+			mySocket.onclose = function (evt) {
+				mySocket = undefined;
+				};
+			mySocket.onerror = function (evt) {
+				console.log ("wsWatchForChange: socket for outline " + urlOpmlFile + " received an error.");
+				};
+			}
+		}
+	readHttpFile (urlOpmlFile, undefined, undefined, function (err, opmltext) {
+		if (err) {
+			callback (err);
+			}
+		else {
+			if (options.flSubscribe) {
+				var theOutline = opmlParse (opmltext);
+				urlSocketServer = theOutline.opml.head.urlUpdateSocket;
+				wsWatchForChange (); //connect with socket server
+				self.setInterval (wsWatchForChange, 1000); //make sure we stay connected
+				callback (undefined, theOutline);
+				}
+			else {
+				callback (undefined, opmlParse (opmltext));
+				}
+			}
+		});
 	}
