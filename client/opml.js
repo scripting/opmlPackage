@@ -183,7 +183,7 @@ function readOutline (urlOpmlFile, options, callback) { //9/24/21 by DW
 		return (true);
 		}
 	function readHttpFile (url, timeoutInMilliseconds, headers, callback) { 
-		if (timeoutInMilliseconds === undefined) {
+		if (timeoutInMilliseconds === undefined) { 
 			timeoutInMilliseconds = 5000;
 			}
 		if (headers === undefined) {
