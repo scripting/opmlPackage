@@ -1,9 +1,10 @@
-const myVersion = "0.4.10", myProductName = "opmlPackage"; 
+const myVersion = "0.4.12", myProductName = "opmlPackage"; 
 
 exports.parse = parse; 
 exports.stringify = stringify; 
 exports.htmlify = getOutlineHtml; 
-exports.visitAll = visitAll; 
+exports.markdownToOutline = markdownToOutline; //1/3/22 by DW
+exports.outlineToMarkdown = outlineToMarkdown; //1/3/22 by DW
 
 const utils = require ("daveutils");
 const opmltojs = require ("opmltojs");
@@ -12,6 +13,8 @@ const opmlToJs = require ("opmltojs");
 
 function parse (opmltext, callback) { //returns a JavaScript object with all the info in the opmltext
 	//Changes
+		//12/27/21; 10:06:12 AM by DW
+			//Under some circumstances, xml2js.parseString will return a result of null. It shows up in Daytona's log. So we check for it, and if it comes up, return an error. 
 		//1/18/21; 10:21:27 AM by DW
 			//I created an OPML format that added a "subs" attribute to each headline that had subs. This was an error, but was still valid OPML, but it caused this code to fail, because subs was the wrong type. It is always a mistake, if it's possible that your OPML will be converted to a JS object. So I protected against it here, and don't copy an attribute called subs if it's present. It's possible that this fix could cause problems too, btw. The code is in Old School, look for saveDayInOpml. 
 		//4/18/20; 5:43:20 PM by DW
@@ -78,18 +81,24 @@ function parse (opmltext, callback) { //returns a JavaScript object with all the
 			callback (err);
 			}
 		else {
-			var theOutline = {
-				opml: new Object ()
+			if (jstruct == null) { //12/27/21 by DW
+				let err = {message: "Internal error: xml2js.parseString returned null."};
+				callback (err);
 				}
-			convert (jstruct.opml, theOutline.opml);
-			addGenerator (theOutline.opml); //8/6/17 by DW
-			if (isScalar (theOutline.opml.head)) { //8/6/17 by DW
-				theOutline.opml.head = new Object ();
+			else {
+				var theOutline = {
+					opml: new Object ()
+					}
+				convert (jstruct.opml, theOutline.opml);
+				addGenerator (theOutline.opml); //8/6/17 by DW
+				if (isScalar (theOutline.opml.head)) { //8/6/17 by DW
+					theOutline.opml.head = new Object ();
+					}
+				if (isScalar (theOutline.opml.body)) { //8/6/17 by DW
+					theOutline.opml.body = new Object ();
+					}
+				callback (undefined, theOutline);
 				}
-			if (isScalar (theOutline.opml.body)) { //8/6/17 by DW
-				theOutline.opml.body = new Object ();
-				}
-			callback (undefined, theOutline);
 			}
 		});
 	//xml2js.parseString (opmltext, options, function (err, jstruct) {

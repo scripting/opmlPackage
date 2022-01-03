@@ -68,6 +68,14 @@ I have a few OPML-related projects on GitHub and on the web.
 
 #### Updates
 
+#### v0.4.12 -- 1/3/22 by DW
+
+Two new routines, opml.markdownToOutline and opml.outlineToMarkdown, to read and write markdown files that are used to represent outlines. This is an extended Markdown that LogSeq generates. The format does not have a name at this time, or as far as I know, a spec, but at least now there is JavaScript code that reads and writes the format. 
+
+We are using this code in a new version of Drummer in the works. 
+
+It is being discussed in this <a href="https://github.com/scripting/drummerRFC/issues/4#issuecomment-1004157802">thread</a>. 
+
 #### v0.4.10 -- 9/24/21 by DW
 
 New entry-point in the <a href="https://github.com/scripting/opmlPackage/blob/main/client/opml.js">client</a>, opml.read. 
