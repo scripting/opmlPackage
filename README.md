@@ -68,6 +68,10 @@ I have a few OPML-related projects on GitHub and on the web.
 
 #### Updates
 
+#### v0.4.17 -- 1/4/22 by DW
+
+Added expandInclude in Node package. 
+
 #### v0.4.15 -- 1/4/22 by DW
 
 Last night's release only worked in the client version. The Node package was broken. It should now be fixed. 
