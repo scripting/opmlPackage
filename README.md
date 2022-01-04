@@ -72,7 +72,7 @@ I have a few OPML-related projects on GitHub and on the web.
 
 Last night's release only worked in the client version. The Node package was broken. It should now be fixed. 
 
-Also added a new example app that demonstrates the reading and writing of markdown/outline files. 
+Also added a new <a href="https://github.com/scripting/opmlPackage/tree/main/examples/markdown">example app</a> that demonstrates the reading and writing of markdown/outline files in a Node app. 
 
 #### v0.4.12 -- 1/3/22 by DW
 

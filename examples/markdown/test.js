@@ -9,16 +9,16 @@ fs.readFile ("states.md", function (err, mdtext) {
 		}
 	else {
 		var theOutline = opml.markdownToOutline (mdtext.toString ());
-		fs.writeFile ("newfiles/states.opml", opml.stringify (theOutline), function (err) {
+		fs.writeFile ("newStates.opml", opml.stringify (theOutline), function (err) {
 			if (err) {
 				console.log ("There was an error writing states.md: " + err.message);
 				}
 			});
-		fs.writeFile ("newfiles/states.md", opml.outlineToMarkdown (theOutline), function (err) {
+		fs.writeFile ("newStates.md", opml.outlineToMarkdown (theOutline), function (err) {
 			if (err) {
 				console.log ("There was an error writing states.md: " + err.message);
 				}
 			});
-		console.log ("\nLook for the newfiles directory in the same directory as test.js for new versions of the files.\n");
+		console.log ("\nLook for newStates.md and newStates.opml in the same directory as test.js.\n");
 		}
 	});
