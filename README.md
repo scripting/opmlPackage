@@ -68,6 +68,12 @@ I have a few OPML-related projects on GitHub and on the web.
 
 #### Updates
 
+#### v0.4.15 -- 1/4/22 by DW
+
+Last night's release only worked in the client version. The Node package was broken. It should now be fixed. 
+
+Also added a new example app that demonstrates the reading and writing of markdown/outline files. 
+
 #### v0.4.12 -- 1/3/22 by DW
 
 Two new routines, opml.markdownToOutline and opml.outlineToMarkdown, to read and write markdown files that are used to represent outlines. This is an extended Markdown that LogSeq generates. The format does not have a name at this time, or as far as I know, a spec, but at least now there is JavaScript code that reads and writes the format. 

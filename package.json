@@ -2,15 +2,14 @@
 	"name": "opml",
 	"description": "Node and browser-based JavaScript code that reads and writes OPML",
 	"author": "Dave Winer <dave@scripting.com>",
-	"version": "0.4.12",
+	"version": "0.4.15",
 	"license": "MIT",
 	"repository": {
 		"type": "git",
 		"url": "https://github.com/scripting/opmlpackage.git"
 		},
 	"files": [
-		"opmlpackage.js",
-		"commoncode.js"
+		"opmlpackage.js"
 		],
 	"main": "opmlpackage.js",
 	"dependencies" : {

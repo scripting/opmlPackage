@@ -1,0 +1,12 @@
+{
+	"name": "test",
+	"description": "Test reading and writing markdown/outline files.",
+	"author": "Dave Winer <dave@scripting.com>",
+	"version": "0.4.0",
+	"license": "MIT",
+	"main": "test.js",
+	"dependencies" : {
+		"daveutils": "*",
+		"opml": "*"
+		} 
+	}

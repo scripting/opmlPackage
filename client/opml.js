@@ -62,7 +62,7 @@ function outlineToJson (adrx, nameOutlineElement) { //12/25/20 by DW
 		}
 	return (theOutline);
 	}
-function markdownToOutline (mdtext) { //returns a JS object compiled from a Markdown outline
+function markdownToOutline (mdtext) {  //1/3/22 by DW
 	//Changes
 		//1/3/22; 5:50:36 PM by DW
 			//Turn a markdown file as created by LogSeq or a compatible product 
@@ -77,6 +77,7 @@ function markdownToOutline (mdtext) { //returns a JS object compiled from a Mark
 				}
 			}
 		};
+	mdtext = mdtext.toString ();
 	var lines = mdtext.split ("\n"), lastlevel = 0, lastnode = undefined, currentsubs = theOutline.opml.body.subs, stack = new Array ();
 	lines.forEach (function (theLine) {
 		var thislevel = 0, flInsert = true;
@@ -122,7 +123,7 @@ function markdownToOutline (mdtext) { //returns a JS object compiled from a Mark
 		});
 	return (theOutline);
 	}
-function outlineToMarkdown (theOutline) {
+function outlineToMarkdown (theOutline) {  //1/3/22 by DW
 	//Changes
 		//1/3/22; 6:03:00 PM by DW
 			//Generate markdown text from the indicated outline structure 
@@ -155,7 +156,6 @@ function outlineToMarkdown (theOutline) {
 	dolevel (theOutline.opml.body)
 	return (mdtext);
 	}
-
 
 function opmlParse (opmltext) {
 	//Changes

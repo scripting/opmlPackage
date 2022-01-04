@@ -1,0 +1,63 @@
+- United States
+	- Far West
+		- Alaska
+		- California
+		capital:: Sacramento
+		- Hawaii
+		- Nevada
+		- Oregon
+		- Washington
+	- Great Plains
+		- Kansas
+		- Nebraska
+		- North Dakota
+		- Oklahoma
+		- South Dakota
+	- Mid-Atlantic
+		- Delaware
+		- Maryland
+		- New Jersey
+		- New York
+		capital:: Albany
+		- Pennsylvania
+	- Midwest
+		- Illinois
+		- Indiana
+		- Iowa
+		- Kentucky
+		- Michigan
+		- Minnesota
+		- Missouri
+		- Ohio
+		- West Virginia
+		- Wisconsin
+		capital:: Madison
+	- Mountains
+		- Colorado
+		- Idaho
+		- Montana
+		- Utah
+		- Wyoming
+	- New England
+		- Connecticut
+		- Maine
+		- Massachusetts
+		- New Hampshire
+		- Rhode Island
+		- Vermont
+	- South
+		- Alabama
+		- Arkansas
+		- Florida
+		- Georgia
+		- Louisiana
+		capital:: Baton Rouge
+		- Mississippi
+		- North Carolina
+		- South Carolina
+		- Tennessee
+		- Virginia
+	- Southwest
+		- Arizona
+		- New Mexico
+		- Texas
