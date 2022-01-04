@@ -1,15 +1,16 @@
-const myVersion = "0.4.15", myProductName = "opmlPackage"; 
+const myVersion = "0.4.17", myProductName = "opmlPackage"; 
 
 exports.parse = parse; 
 exports.stringify = stringify; 
 exports.htmlify = getOutlineHtml; 
 exports.markdownToOutline = markdownToOutline; //1/3/22 by DW
 exports.outlineToMarkdown = outlineToMarkdown; //1/3/22 by DW
+exports.expandInclude = expandInclude; //1/4/22 by DW
 
 const utils = require ("daveutils");
 const opmltojs = require ("opmltojs");
 const xml2js = require ("xml2js");
-const opmlToJs = require ("opmltojs");
+const request = require ("request");
 
 function parse (opmltext, callback) { //returns a JavaScript object with all the info in the opmltext
 	//Changes
@@ -252,4 +253,44 @@ function outlineToMarkdown (theOutline) { //1/3/22 by DW
 	//addAtts (theOutline.opml.head);
 	dolevel (theOutline.opml.body)
 	return (mdtext);
+	}
+
+function httpRequest (url, callback) {
+	request (url, function (err, response, data) {
+		if (err) {
+			callback (err);
+			}
+		else {
+			var code = response.statusCode;
+			if ((code < 200) || (code > 299)) {
+				const message = "The request returned a status code of " + response.statusCode + ".";
+				callback ({message});
+				}
+			else {
+				callback (undefined, data) 
+				}
+			}
+		});
+	}
+function expandInclude (theNode, callback) {//1/4/22 by DW
+	if ((theNode.type == "include") && (theNode.url !== undefined)) {
+		httpRequest (theNode.url, function (err, opmltext) {
+			if (err) {
+				callback (err);
+				}
+			else {
+				opml.parse (opmltext, function (err, theOutline) {
+					if (err) {
+						callback (err);
+						}
+					else {
+						callback (undefined, theOutline.opml.body);
+						}
+					});
+				}
+			})
+		}
+	else {
+		callback (undefined, theNode);
+		}
 	}

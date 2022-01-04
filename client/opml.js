@@ -21,6 +21,9 @@ function xmlGatherAttributes (adrx, theTable) {
 			}
 		}
 	}
+function xmlGetAttribute (adrx, name) {
+	return ($(adrx).attr (name));
+	}
 function xmlGetAddress (adrx, name) {
 	return (adrx.find (name));
 	}
@@ -45,6 +48,7 @@ function xmlGetNodeNameProp (adrx) { //12/10/13 by DW
 function xmlHasSubs (adrx) {
 	return ($(adrx).children ().length > 0); //use jQuery to get answer -- 12/30/13 by DW
 	};
+
 function outlineToJson (adrx, nameOutlineElement) { //12/25/20 by DW
 	//Changes
 		//10/20/14; 5:54:44 PM by DW
@@ -256,7 +260,6 @@ function visitAll (theOutline, callback) {
 		}
 	visitSubs (theOutline.opml.body);
 	}
-
 
 function readOutline (urlOpmlFile, options, callback) { //9/24/21 by DW
 	//Changes
