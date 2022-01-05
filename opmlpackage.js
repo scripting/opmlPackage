@@ -123,7 +123,7 @@ function parse (opmltext, callback) { //returns a JavaScript object with all the
 		//});
 	}
 function stringify (theOutline) { //returns the opmltext for the outline
-	var opmltext = opmlToJs.opmlify (theOutline);
+	var opmltext = opmltojs.opmlify (theOutline);
 	return (opmltext);
 	}
 function getOutlineHtml (theOutline) {
@@ -190,10 +190,19 @@ function markdownToOutline (mdtext) { //1/3/22 by DW
 			theLine = utils.stringDelete (theLine, 1, 2);
 			}
 		else { //is the line an attribute?
+			if (theLine.length === 0) {
+				flInsert = false;
+				}
 			if (utils.stringContains (theLine, ":: ")) {
 				let parts = theLine.split (":: ");
-				lastnode ["_" + parts [0]] = parts [1];
-				flInsert = false;
+				if (lastnode === undefined) {
+					theOutline.opml.head ["_" + parts [0].trim()] = parts [1];
+					flInsert = false;
+					}
+				else {
+					lastnode ["_" + parts [0].trim()] = parts [1];
+					flInsert = false;
+					}
 				}
 			}
 		if (thislevel > lastlevel) {
@@ -230,11 +239,23 @@ function outlineToMarkdown (theOutline) { //1/3/22 by DW
 	function add (s) {
 		mdtext += utils.filledString ("\t", indentlevel) + s + "\n";
 		}
-	function addAtts (atts) {
+	function addHeadAtts (atts) {
 		for (var x in atts) {
 			if ((x != "subs") && (x != "text")) {
 				if (utils.beginsWith (x, "_")) {
 					add (utils.stringDelete (x, 1, 1) + ":: " + atts [x]);
+					}
+				}
+			}
+			if (mdtext.length > 0) {
+				add ("");
+				}
+		}
+	function addAtts (atts) {
+		for (var x in atts) {
+			if ((x != "subs") && (x != "text")) {
+				if (utils.beginsWith (x, "_")) {
+					add ("  " + utils.stringDelete (x, 1, 1) + ":: " + atts [x]);
 					}
 				}
 			}
@@ -250,8 +271,8 @@ function outlineToMarkdown (theOutline) { //1/3/22 by DW
 				}
 			});
 		}
-	//addAtts (theOutline.opml.head);
-	dolevel (theOutline.opml.body)
+	addHeadAtts (theOutline.opml.head);
+	dolevel (theOutline.opml.body);
 	return (mdtext);
 	}
 
