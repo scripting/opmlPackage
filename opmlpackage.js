@@ -1,4 +1,4 @@
-const myVersion = "0.4.17", myProductName = "opmlPackage"; 
+const myVersion = "0.4.18", myProductName = "opmlPackage"; 
 
 exports.parse = parse; 
 exports.stringify = stringify; 
@@ -279,7 +279,7 @@ function expandInclude (theNode, callback) {//1/4/22 by DW
 				callback (err);
 				}
 			else {
-				opml.parse (opmltext, function (err, theOutline) {
+				parse (opmltext, function (err, theOutline) {
 					if (err) {
 						callback (err);
 						}
