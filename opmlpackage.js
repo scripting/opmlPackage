@@ -1,4 +1,4 @@
-const myVersion = "0.4.18", myProductName = "opmlPackage"; 
+const myVersion = "0.4.20", myProductName = "opmlPackage"; 
 
 exports.parse = parse; 
 exports.stringify = stringify; 
@@ -123,7 +123,7 @@ function parse (opmltext, callback) { //returns a JavaScript object with all the
 		//});
 	}
 function stringify (theOutline) { //returns the opmltext for the outline
-	var opmltext = opmlToJs.opmlify (theOutline);
+	var opmltext = opmltojs.opmlify (theOutline);
 	return (opmltext);
 	}
 function getOutlineHtml (theOutline) {
@@ -162,6 +162,8 @@ function visitAll (theOutline, callback) {
 
 function markdownToOutline (mdtext) { //1/3/22 by DW
 	//Changes
+		//1/7/22; 4:51:54 PM by DW
+			//Any atts that show up at the beginning of a file become head-level atts. 
 		//1/3/22; 5:50:36 PM by DW
 			//Turn a markdown file as created by LogSeq or a compatible product 
 			//into an outline structure compatible with the one that is created from 
@@ -176,7 +178,8 @@ function markdownToOutline (mdtext) { //1/3/22 by DW
 			}
 		};
 	mdtext = mdtext.toString ();
-	var lines = mdtext.split ("\n"), lastlevel = 0, lastnode = undefined, currentsubs = theOutline.opml.body.subs, stack = new Array ();
+	var lines = mdtext.split ("\n"), lastlevel = 0, stack = new Array ();;
+	var lastnode = undefined, currentsubs = theOutline.opml.body.subs;;
 	lines.forEach (function (theLine) {
 		var thislevel = 0, flInsert = true;
 		while (theLine.length > 0) {
@@ -192,7 +195,12 @@ function markdownToOutline (mdtext) { //1/3/22 by DW
 		else { //is the line an attribute?
 			if (utils.stringContains (theLine, ":: ")) {
 				let parts = theLine.split (":: ");
-				lastnode ["_" + parts [0]] = parts [1];
+				if (lastnode === undefined) { //1/7/22 by DW
+					theOutline.opml.head ["_" + parts [0]] = parts [1];
+					}
+				else {
+					lastnode ["_" + parts [0]] = parts [1];
+					}
 				flInsert = false;
 				}
 			}
@@ -250,7 +258,7 @@ function outlineToMarkdown (theOutline) { //1/3/22 by DW
 				}
 			});
 		}
-	//addAtts (theOutline.opml.head);
+	addAtts (theOutline.opml.head);
 	dolevel (theOutline.opml.body)
 	return (mdtext);
 	}
