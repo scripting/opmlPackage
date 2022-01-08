@@ -68,6 +68,12 @@ I have a few OPML-related projects on GitHub and on the web.
 
 #### Updates
 
+#### v0.4.21 -- 1/8/22 by DW
+
+There was some confusion about whether or not we should try to handle head-level atts in the markdown format, and in the end I decided not to try to do that at this time. Before doing this I have to understand much better what's going on on the other side of the interop. At this stage, whatever I do is going to be wrong, and will have to be grandfathered in for perpetuity. We have a pretty good ability to interop on the content of the outlines, but different products see the file-level metadata very differently. If there ever is an agreement on how this should work it's going to happen later. 
+
+However I did fix a problem, if a head-level att does appear as we import, we don't try to attach it to undefined. 
+
 #### v0.4.17 -- 1/4/22 by DW
 
 Added expandInclude in Node package. 

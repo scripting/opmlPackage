@@ -1,4 +1,4 @@
-const myVersion = "0.4.20", myProductName = "opmlPackage"; 
+const myVersion = "0.4.21", myProductName = "opmlPackage"; 
 
 exports.parse = parse; 
 exports.stringify = stringify; 
@@ -162,8 +162,8 @@ function visitAll (theOutline, callback) {
 
 function markdownToOutline (mdtext) { //1/3/22 by DW
 	//Changes
-		//1/7/22; 4:51:54 PM by DW
-			//Any atts that show up at the beginning of a file become head-level atts. 
+		//1/8/22; 10:54:14 AM by DW
+			//Any atts that show up at the beginning of a file are ignored. Previously they would cause the process to crash.
 		//1/3/22; 5:50:36 PM by DW
 			//Turn a markdown file as created by LogSeq or a compatible product 
 			//into an outline structure compatible with the one that is created from 
@@ -195,10 +195,7 @@ function markdownToOutline (mdtext) { //1/3/22 by DW
 		else { //is the line an attribute?
 			if (utils.stringContains (theLine, ":: ")) {
 				let parts = theLine.split (":: ");
-				if (lastnode === undefined) { //1/7/22 by DW
-					theOutline.opml.head ["_" + parts [0]] = parts [1];
-					}
-				else {
+				if (lastnode !== undefined) { //1/8/22 by DW
 					lastnode ["_" + parts [0]] = parts [1];
 					}
 				flInsert = false;
@@ -258,7 +255,7 @@ function outlineToMarkdown (theOutline) { //1/3/22 by DW
 				}
 			});
 		}
-	addAtts (theOutline.opml.head);
+	//addAtts (theOutline.opml.head);
 	dolevel (theOutline.opml.body)
 	return (mdtext);
 	}

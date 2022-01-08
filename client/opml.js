@@ -68,6 +68,8 @@ function outlineToJson (adrx, nameOutlineElement) { //12/25/20 by DW
 	}
 function markdownToOutline (mdtext) {  //1/3/22 by DW
 	//Changes
+		//1/8/22; 10:54:14 AM by DW
+			//Any atts that show up at the beginning of a file are ignored. Previously they would cause the process to crash.
 		//1/3/22; 5:50:36 PM by DW
 			//Turn a markdown file as created by LogSeq or a compatible product 
 			//into an outline structure compatible with the one that is created from 
@@ -98,7 +100,9 @@ function markdownToOutline (mdtext) {  //1/3/22 by DW
 		else { //is the line an attribute?
 			if (stringContains (theLine, ":: ")) {
 				let parts = theLine.split (":: ");
-				lastnode ["_" + parts [0]] = parts [1];
+				if (lastnode !== undefined) { //1/8/22 by DW
+					lastnode ["_" + parts [0]] = parts [1];
+					}
 				flInsert = false;
 				}
 			}
