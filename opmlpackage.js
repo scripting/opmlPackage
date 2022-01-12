@@ -1,4 +1,4 @@
-const myVersion = "0.4.21", myProductName = "opmlPackage"; 
+const myVersion = "0.4.22", myProductName = "opmlPackage"; 
 
 exports.parse = parse; 
 exports.stringify = stringify; 
@@ -160,8 +160,11 @@ function visitAll (theOutline, callback) {
 	visitSubs (theOutline.opml.body);
 	}
 
-function markdownToOutline (mdtext) { //1/3/22 by DW
+function markdownToOutline (mdtext, options) { //1/3/22 by DW
 	//Changes
+		//1/12/22; 5:17:25 PM by DW
+			//New optional param, options. 
+			//options.flAddUnderscores, defaults true. 
 		//1/8/22; 10:54:14 AM by DW
 			//Any atts that show up at the beginning of a file are ignored. Previously they would cause the process to crash.
 		//1/3/22; 5:50:36 PM by DW
@@ -177,6 +180,14 @@ function markdownToOutline (mdtext) { //1/3/22 by DW
 				}
 			}
 		};
+	
+	if (options === undefined) { //1/12/22 by DW
+		options = new Object ();
+		}
+	if (options.flAddUnderscores === undefined) {
+		options.flAddUnderscores = true;
+		}
+	
 	mdtext = mdtext.toString ();
 	var lines = mdtext.split ("\n"), lastlevel = 0, stack = new Array ();;
 	var lastnode = undefined, currentsubs = theOutline.opml.body.subs;;
@@ -196,7 +207,8 @@ function markdownToOutline (mdtext) { //1/3/22 by DW
 			if (utils.stringContains (theLine, ":: ")) {
 				let parts = theLine.split (":: ");
 				if (lastnode !== undefined) { //1/8/22 by DW
-					lastnode ["_" + parts [0]] = parts [1];
+					var name = (options.flAddUnderscores) ? "_" + parts [0] : parts [0]; //1/12/22 by DW
+					lastnode [name] = parts [1];
 					}
 				flInsert = false;
 				}

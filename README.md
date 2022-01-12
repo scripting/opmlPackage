@@ -68,6 +68,16 @@ I have a few OPML-related projects on GitHub and on the web.
 
 #### Updates
 
+#### v0.4.22 -- 1/12/22 by DW
+
+New optional param on markdownToOutline, options, an object. 
+
+And options.flAddUnderscores, defaults true. If true, we add underscores before attribute names coming from the markdown, so we know to restore them when converting back to markdown.
+
+But sometimes the outline is going to OPML, and on to a processor where you want it to recognize its name without the underscore. 
+
+When we're publishing a blog from a LogSeq markdown outline is an example. 
+
 #### v0.4.21 -- 1/8/22 by DW
 
 There was some confusion about whether or not we should try to handle head-level atts in the markdown format, and in the end I decided not to try to do that at this time. Before doing this I have to understand much better what's going on on the other side of the interop. At this stage, whatever I do is going to be wrong, and will have to be grandfathered in for perpetuity. We have a pretty good ability to interop on the content of the outlines, but different products see the file-level metadata very differently. If there ever is an agreement on how this should work it's going to happen later. 
