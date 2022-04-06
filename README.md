@@ -56,17 +56,21 @@ The <a href="https://github.com/scripting/opmlPackage/tree/main/examples/browser
 
 I have a few OPML-related projects on GitHub and on the web. 
 
-* <a href="https://github.com/scripting/instantOutlines">instantOutlines</a> -- Example code for sharing live-updated outlines between users, using websockets as the notification system.
+* <a href="http://drummer.scripting.com/">Drummer</a> -- Browser and Electron-based outliner that uses OPML as its native format. 
 
 * <a href="http://this.how/opmlChecklist/">OPML Developer checklist</a>. Examples, source code and advice for people adapting outliners to read and write OPML.
 
-* <a href="http://dev.opml.org/spec2.html">OPML 2.0 spec</a>.
+* <a href="https://github.com/scripting/instantOutlines">instantOutlines</a> -- Example code for sharing live-updated outlines between users, using websockets as the notification system.
 
-* Drummer -- Browser and Electron-based outliner that uses OPML as its native format. Coming soon, but not released as of July 2021.
+* <a href="http://dev.opml.org/spec2.html">OPML 2.0 spec</a>.
 
 * etc.
 
 #### Updates
+
+#### v0.4.23 -- 3/18/22 by DW
+
+opml.visitAll is now defined in both the Node and browser versions. Previously it was only defined in browser version.
 
 #### v0.4.22 -- 1/12/22 by DW
 

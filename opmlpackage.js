@@ -1,4 +1,4 @@
-const myVersion = "0.4.22", myProductName = "opmlPackage"; 
+const myVersion = "0.4.23", myProductName = "opmlPackage"; 
 
 exports.parse = parse; 
 exports.stringify = stringify; 
@@ -6,6 +6,7 @@ exports.htmlify = getOutlineHtml;
 exports.markdownToOutline = markdownToOutline; //1/3/22 by DW
 exports.outlineToMarkdown = outlineToMarkdown; //1/3/22 by DW
 exports.expandInclude = expandInclude; //1/4/22 by DW
+exports.visitAll = visitAll; //3/18/22 by DW
 
 const utils = require ("daveutils");
 const opmltojs = require ("opmltojs");
