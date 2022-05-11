@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+<opml version="2.0">
+	<head>
+		<title>examples/includes/includes.opml</title>
+		<dateModified>Wed, 11 May 2022 21:11:25 GMT</dateModified>
+		<expansionState></expansionState>
+		<vertScrollState>1</vertScrollState>
+		<windowTop>300</windowTop>
+		<windowLeft>700</windowLeft>
+		<windowBottom>900</windowBottom>
+		<windowRight>1500</windowRight>
+		</head>
+	<body text="examples/includes/includes.opml">
+		<outline created="Wed, 11 May 2022 21:02:19 GMT" name="colors" text="Colors" type="include" url="http://scripting.com/publicfolder/misc/inclusionDemo/colors.opml"></outline>
+		<outline created="Wed, 11 May 2022 21:03:38 GMT" name="kidsNames" text="Kids names" type="include" url="http://scripting.com/publicfolder/misc/inclusionDemo/names.opml"></outline>
+		<outline created="Wed, 11 May 2022 21:03:42 GMT" text="Veggies" type="include" url="http://scripting.com/publicfolder/misc/inclusionDemo/veggies.opml"></outline>
+		</body>
+	</opml>
