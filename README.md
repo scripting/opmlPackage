@@ -68,6 +68,18 @@ I have a few OPML-related projects on GitHub and on the web.
 
 #### Updates
 
+#### v0.4.24 -- 5/11/22 by DW
+
+New function -- opml.expandIncludes.
+
+Takes two params, an outline that could possibly have include nodes, and a callback, that receives a copy of the outline with includes expanded. 
+
+It doesn't stop for errors. This was much-debated internally, but there is linkrot and an outline with includes should work as well as it possibly can, as a blog with one broken link still works.
+
+It is only available in the Node version, but it could be adapted to work in the client if opml.expandInclude (sic) is converted. 
+
+BTW, sorry for the closeness in the names, expandInclude and expandIncludes, but it is correct, one is singular and the other is plural. 
+
 #### v0.4.23 -- 3/18/22 by DW
 
 opml.visitAll is now defined in both the Node and browser versions. Previously it was only defined in browser version.

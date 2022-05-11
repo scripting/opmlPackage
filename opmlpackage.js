@@ -1,4 +1,4 @@
-const myVersion = "0.4.23", myProductName = "opmlPackage"; 
+const myVersion = "0.4.24", myProductName = "opmlPackage"; 
 
 exports.parse = parse; 
 exports.stringify = stringify; 
@@ -7,6 +7,7 @@ exports.markdownToOutline = markdownToOutline; //1/3/22 by DW
 exports.outlineToMarkdown = outlineToMarkdown; //1/3/22 by DW
 exports.expandInclude = expandInclude; //1/4/22 by DW
 exports.visitAll = visitAll; //3/18/22 by DW
+exports.expandIncludes = expandIncludes; //5/11/22 by DW
 
 const utils = require ("daveutils");
 const opmltojs = require ("opmltojs");
@@ -291,6 +292,12 @@ function httpRequest (url, callback) {
 		});
 	}
 function expandInclude (theNode, callback) {//1/4/22 by DW
+	//Changes
+		//5/11/22; 8:52:08 AM by DW
+			//If the node is an include, return the body of the OPML file it points to. 
+			//If it's not an include, return the node itself.
+			//It's used in the app that converts docserver outlines to markdown for uploading to github.
+				//https://github.com/scripting/docServer/blob/main/markdownapp/docservertomarkdown.js#L124
 	if ((theNode.type == "include") && (theNode.url !== undefined)) {
 		httpRequest (theNode.url, function (err, opmltext) {
 			if (err) {
@@ -311,4 +318,120 @@ function expandInclude (theNode, callback) {//1/4/22 by DW
 	else {
 		callback (undefined, theNode);
 		}
+	}
+function expandIncludes (theOutline, callback) { //5/11/22 by DW
+	function expandBody (theBody, callback) {
+		var theNewBody = new Object (), lastNewNode = theNewBody, stack = new Array (), currentOutline;
+		function getNameAtt (theNode) {
+			var nameatt = theNode.name;
+			if (nameatt === undefined) {
+				nameatt = utils.innerCaseName (theNode.text);
+				}
+			return (nameatt);
+			}
+		function inlevelcallback () {
+			stack [stack.length] = currentOutline;
+			currentOutline = lastNewNode;
+			if (currentOutline.subs === undefined) {
+				currentOutline.subs = new Array ();
+				}
+			}
+		function nodecallback (theNode, path) {
+			var newNode = new Object ();
+			utils.copyScalars (theNode, newNode);
+			currentOutline.subs [currentOutline.subs.length] = newNode;
+			lastNewNode = newNode;
+			}
+		function outlevelcallback () {
+			currentOutline = stack [stack.length - 1];
+			stack.length--; //pop the stack
+			}
+		function bodyVisiter (theOutline, visitcompletecallback) {
+			function readInclude (theIncludeNode, callback) {
+				console.log ("readInclude: url == " + theIncludeNode.url);
+				expandInclude (theIncludeNode, function (err, theBody) {
+					if (err) {
+						callback (undefined);
+						}
+					else {
+						expandBody (theBody, function (expandedBody) {
+							callback (expandedBody); 
+							});
+						}
+					});
+				}
+			function doLevel (head, path, levelcompletecallback) {
+				function doOneSub (head, ixsub) {
+					if ((head.subs !== undefined) && (ixsub < head.subs.length)) {
+						var sub = head.subs [ixsub], subpath = path + getNameAtt (sub);
+						if (!utils.getBoolean (sub.iscomment)) { 
+							if (sub.type == "include") {
+								nodecallback (sub, subpath);
+								readInclude (sub, function (theIncludedOutline) {
+									if (theIncludedOutline !== undefined) {
+										doLevel (theIncludedOutline, subpath + "/", function () { 
+											outlevelcallback ();
+											doOneSub (head, ixsub +1);
+											});
+										}
+									else { //6/25/15 by DW -- don't let errors derail us
+										doOneSub (head, ixsub +1);
+										}
+									});
+								}
+							else {
+								nodecallback (sub, subpath);
+								if (sub.subs !== undefined) {
+									doLevel (sub, subpath + "/", function () { 
+										outlevelcallback ();
+										doOneSub (head, ixsub +1);
+										});
+									}
+								else {
+									doOneSub (head, ixsub +1);
+									}
+								}
+							}
+						else {
+							doOneSub (head, ixsub +1);
+							}
+						}
+					else {
+						levelcompletecallback ();
+						}
+					}
+				inlevelcallback ();
+				if (head.type == "include") {
+					readInclude (head, function (theIncludedOutline) {
+						if (theIncludedOutline !== undefined) {
+							doOneSub (theIncludedOutline, 0);
+							}
+						});
+					}
+				else {
+					doOneSub (head, 0);
+					}
+				}
+			
+			doLevel (theBody, "", function () {
+				outlevelcallback ();
+				visitcompletecallback ();
+				});
+			}
+		
+		bodyVisiter (theOutline, function () {
+			callback (theNewBody);
+			});
+		}
+	expandBody (theOutline.opml.body, function (theNewBody) {
+		var theNewOutline = {
+			opml: {
+				head: {
+					},
+				body: theNewBody
+				}
+			}
+		utils.copyScalars (theOutline.opml.head, theNewOutline.opml.head);
+		callback (theNewOutline);
+		});
 	}
