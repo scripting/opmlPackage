@@ -68,6 +68,12 @@ I have a few OPML-related projects on GitHub and on the web.
 
 #### Updates
 
+#### v0.5.0 -- 10/25/22 by DW
+
+New function -- opml.readOutline. A simple bit of recurring code. Reads an outline over the web returns a standard outline object. 
+
+It's time to start a fresh sequence of versions with 0.5.0. No breakage, of course. ;-)
+
 #### v0.4.24 -- 5/11/22 by DW
 
 New function -- opml.expandIncludes.

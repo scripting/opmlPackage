@@ -1,4 +1,4 @@
-const myVersion = "0.4.24", myProductName = "opmlPackage"; 
+const myVersion = "0.5.1", myProductName = "opmlPackage"; 
 
 exports.parse = parse; 
 exports.stringify = stringify; 
@@ -8,6 +8,7 @@ exports.outlineToMarkdown = outlineToMarkdown; //1/3/22 by DW
 exports.expandInclude = expandInclude; //1/4/22 by DW
 exports.visitAll = visitAll; //3/18/22 by DW
 exports.expandIncludes = expandIncludes; //5/11/22 by DW
+exports.readOutline = readOutline; //10/25/22 by DW
 
 const utils = require ("daveutils");
 const opmltojs = require ("opmltojs");
@@ -434,4 +435,22 @@ function expandIncludes (theOutline, callback) { //5/11/22 by DW
 		utils.copyScalars (theOutline.opml.head, theNewOutline.opml.head);
 		callback (theNewOutline);
 		});
+	}
+
+function readOutline (urlOpmlFile, callback) { //10/25/22; 12:30:31 PM by DW -- copied from Daytona
+	httpRequest (urlOpmlFile, function (err, opmltext) {
+		if (err) {
+			callback (err);
+			}
+		else {
+			parse (opmltext, function (err, theOutline) {
+				if (err) {
+					callback (err);
+					}
+				else {
+					callback (undefined, theOutline);
+					}
+				});
+			}
+		})
 	}
