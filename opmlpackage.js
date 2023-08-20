@@ -1,4 +1,5 @@
-const myVersion = "0.5.1", myProductName = "opmlPackage"; 
+const myVersion = "0.5.2", myProductName = "opmlPackage"; 
+const generatorForHead = "opml v" + myVersion + " (npmjs.com/package/opml)";
 
 exports.parse = parse; 
 exports.stringify = stringify; 
@@ -32,7 +33,8 @@ function parse (opmltext, callback) { //returns a JavaScript object with all the
 		}
 	function addGenerator (theOpml) { //follow the example of RSS 2.0
 		try {
-			theOpml.head.generator = myProductName + " v" + myVersion;
+			theOpml.head.generator = generatorForHead; //8/20/23 by DW
+			//theOpml.head.generator = myProductName + " v" + myVersion;
 			}
 		catch (err) {
 			}
