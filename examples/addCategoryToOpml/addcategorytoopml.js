@@ -6,7 +6,7 @@ const opml = require ("opml");
 
 const fsource = "a8c-blogging-club.opml";
 const theCategory = "all,a8c-blogs,bloggers";
-const fdest = ""/users/davewiner/dropbox/portableDave/publicFolder/a8c/subscriptionLists/a8c-blogging-club.opml"";
+const fdest = "/users/davewiner/dropbox/portableDave/publicFolder/a8c/subscriptionLists/a8c-blogging-club.opml";
 
 
 function notComment (item) { //8/21/22 by DW
@@ -35,11 +35,6 @@ fs.readFile (fsource, function (err, opmltext) {
 					});
 				const opmltext = opml.stringify (theOutline);
 				console.log (opmltext);
-				fs.writeFile ("updated-" + fsource, opmltext, function (err) {
-					if (err) {
-						console.log (err.message);
-						}
-					});
 				fs.writeFile (fdest, opmltext, function (err) {
 					if (err) {
 						console.log (err.message);
@@ -49,7 +44,3 @@ fs.readFile (fsource, function (err, opmltext) {
 			});
 		}
 	});
-
-
-
-
