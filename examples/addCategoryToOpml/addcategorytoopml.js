@@ -4,9 +4,10 @@ const fs = require ("fs");
 const utils = require ("daveutils");
 const opml = require ("opml");
 
-const fsource = "a8c-blogging-club.opml";
-const theCategory = "all,a8c-blogs,bloggers";
-const fdest = "/users/davewiner/dropbox/portableDave/publicFolder/a8c/subscriptionLists/a8c-blogging-club.opml";
+const fsource = "wpspecialprojects.opml";
+const theCategory = "all,wp-projects";
+const fdest = "/users/davewiner/dropbox/portableDave/publicFolder/a8c/subscriptionLists/wpspecialprojects.opml";
+
 
 
 function notComment (item) { //8/21/22 by DW
