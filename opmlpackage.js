@@ -1,4 +1,4 @@
-const myVersion = "0.5.2", myProductName = "opmlPackage"; 
+const myVersion = "0.5.3", myProductName = "opmlPackage"; 
 const generatorForHead = "opml v" + myVersion + " (npmjs.com/package/opml)";
 
 exports.parse = parse; 
@@ -132,7 +132,7 @@ function stringify (theOutline) { //returns the opmltext for the outline
 	return (opmltext);
 	}
 function getOutlineHtml (theOutline) {
-	var htmltext = ""; indentlevel = 0;
+	var htmltext = "", indentlevel = 0; //5/24/24 by DW
 	function add (s) {
 		htmltext += filledString ("\t", indentlevel) + s + "\n";
 		}

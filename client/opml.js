@@ -274,7 +274,7 @@ function opmlStringify (theOutline) { //returns the opmltext for the outline -- 
 	return (opmltext);
 	}
 function getOutlineHtml (theOutline) {
-	var htmltext = ""; indentlevel = 0;
+	var htmltext = "", indentlevel = 0; //5/24/24 by DW
 	function add (s) {
 		htmltext += filledString ("\t", indentlevel) + s + "\n";
 		}

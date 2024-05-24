@@ -1,3 +1,13 @@
+#### 5/24/24; 8:12:30 AM by DW
+
+Fixed a problem <a href="https://github.com/scripting/opmlPackage/issues/12">reported</a> on GitHub where we were declaring htmltext and indentlevel incorrectly. 
+
+* `var htmltext = ""; indentlevel = 0;`
+
+Replaced the first semicolon with a comma. 
+
+The problem appeared in two places, in the Node package and in the code to be included with a client app.
+
 #### 8/20/23; 10:31:38 AM by DW
 
 Changed the generator message on OPML files we generate to include the address of the NPM package.
