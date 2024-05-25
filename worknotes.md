@@ -1,3 +1,7 @@
+#### 5/25/24; 3:47:32 PM by DW
+
+Fixed another problem in getOutlineHtml. We were calling filledString and really needed to call utils.filledString.
+
 #### 5/24/24; 8:12:30 AM by DW
 
 Fixed a problem <a href="https://github.com/scripting/opmlPackage/issues/12">reported</a> on GitHub where we were declaring htmltext and indentlevel incorrectly. 
