@@ -1,4 +1,4 @@
-const myVersion = "0.5.4", myProductName = "opmlPackage"; 
+const myVersion = "0.5.5", myProductName = "opmlPackage"; 
 const generatorForHead = "opml v" + myVersion + " (npmjs.com/package/opml)";
 
 exports.parse = parse; 

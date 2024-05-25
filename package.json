@@ -2,7 +2,7 @@
 	"name": "opml",
 	"description": "Node and browser-based JavaScript code that reads and writes OPML",
 	"author": "Dave Winer <dave@scripting.com>",
-	"version": "0.5.4",
+	"version": "0.5.5",
 	"license": "MIT",
 	"repository": {
 		"type": "git",
