@@ -1,3 +1,13 @@
+#### 9/7/24; 9:59:57 AM by DW
+
+visitAll in both client and server versions had a serious bug. 
+
+if a function returns false it's supposed to stop visiting, but it doesn't. 
+
+perhaps i've never encountered a situation where the logic depended on this. 
+
+i have to fix it, i don't see any way around it. 
+
 #### 5/25/24; 3:47:32 PM by DW
 
 Fixed another problem in getOutlineHtml. We were calling filledString and really needed to call utils.filledString.

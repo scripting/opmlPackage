@@ -299,7 +299,9 @@ function visitAll (theOutline, callback) {
 				if (!callback (theSub)) {
 					return (false);
 					}
-				visitSubs (theSub);
+				if (!visitSubs (theSub)) { //9/7/24 by DW -- see worknotes comment
+					return (false);
+					}
 				}
 			}
 		return (true);

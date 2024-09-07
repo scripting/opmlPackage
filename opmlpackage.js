@@ -1,4 +1,4 @@
-const myVersion = "0.5.5", myProductName = "opmlPackage"; 
+const myVersion = "0.5.6", myProductName = "opmlPackage"; 
 const generatorForHead = "opml v" + myVersion + " (npmjs.com/package/opml)";
 
 exports.parse = parse; 
@@ -157,7 +157,9 @@ function visitAll (theOutline, callback) {
 				if (!callback (theSub)) {
 					return (false);
 					}
-				visitSubs (theSub);
+				if (!visitSubs (theSub)) { //9/7/24 by DW -- see worknotes comment
+					return (false);
+					}
 				}
 			}
 		return (true);
