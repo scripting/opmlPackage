@@ -1,6 +1,6 @@
 #### 9/7/24; 9:59:57 AM by DW
 
-visitAll in both client and server versions had a serious bug. 
+<a href="https://github.com/scripting/opmlPackage/blob/main/client/opml.js#L294">visitAll</a> in both client and server versions had a serious bug. 
 
 if a function returns false it's supposed to stop visiting, but it doesn't. 
 
