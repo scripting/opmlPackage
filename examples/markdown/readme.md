@@ -16,5 +16,5 @@ Then it writes the structure to two files: newStates.md and newStates.opml, by c
 
 ### Where to discuss
 
-A <a href="https://github.com/scripting/drummerRFC/issues/4#issuecomment-1004429268">thread</a>  on the DrummerRFC site where this work is being discussed.
+A <b></b><a href="https://github.com/scripting/drummerRFC/issues/4#issuecomment-1004429268">thread</a>  on the DrummerRFC site where this work is being discussed.
 

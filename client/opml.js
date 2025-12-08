@@ -8,6 +8,9 @@ const opml = {
 	outlineToMarkdown //1/3/22 by DW
 	};
 
+function notComment (item) { //12/8/25 by DW
+	return (!utils.getBoolean (item.isComment));
+	}
 function filledString (ch, ct) { //6/4/14 by DW
 	var s = "";
 	for (var i = 0; i < ct; i++) {
@@ -215,14 +218,18 @@ function outlineToPlaintext (theOutline) {  //12/8/25 by DW
 		plaintext += filledString ("\t", indentlevel) + s + "\n";
 		}
 	function dolevel (theNode) {
-		theNode.subs.forEach (function (sub) {
-			add (sub.text);
-			if (sub.subs !== undefined) {
-				indentlevel++;
-				dolevel (sub);
-				indentlevel--;
-				}
-			});
+		if (notComment (theNode)) {
+			theNode.subs.forEach (function (sub) {
+				if (notComment (theNode)) {
+					add (sub.text);
+					if (sub.subs !== undefined) {
+						indentlevel++;
+						dolevel (sub);
+						indentlevel--;
+						}
+					}
+				});
+			}
 		}
 	dolevel (theOutline.opml.body);
 	//console.log ("outlineToPlaintext: plaintext == " + plaintext);

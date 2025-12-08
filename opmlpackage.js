@@ -17,6 +17,9 @@ const opmltojs = require ("opmltojs");
 const xml2js = require ("xml2js");
 const request = require ("request");
 
+function notComment (item) { //12/8/25 by DW
+	return (!utils.getBoolean (item.isComment));
+	}
 function parse (opmltext, callback) { //returns a JavaScript object with all the info in the opmltext
 	//Changes
 		//12/9/24; 9:21:04 AM by DW
@@ -292,14 +295,18 @@ function outlineToPlaintext (theOutline) {  //12/8/25 by DW
 		plaintext += filledString ("\t", indentlevel) + s + "\n";
 		}
 	function dolevel (theNode) {
-		theNode.subs.forEach (function (sub) {
-			add (sub.text);
-			if (sub.subs !== undefined) {
-				indentlevel++;
-				dolevel (sub);
-				indentlevel--;
-				}
-			});
+		if (notComment (theNode)) {
+			theNode.subs.forEach (function (sub) {
+				if (notComment (theNode)) {
+					add (sub.text);
+					if (sub.subs !== undefined) {
+						indentlevel++;
+						dolevel (sub);
+						indentlevel--;
+						}
+					}
+				});
+			}
 		}
 	dolevel (theOutline.opml.body);
 	//console.log ("outlineToPlaintext: plaintext == " + plaintext);
