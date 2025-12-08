@@ -1,4 +1,4 @@
-const myVersion = "0.5.7", myProductName = "opmlPackage"; 
+const myVersion = "0.5.8", myProductName = "opmlPackage"; 
 const generatorForHead = "opml v" + myVersion + " (npmjs.com/package/opml)";
 
 exports.parse = parse; 
@@ -10,6 +10,7 @@ exports.expandInclude = expandInclude; //1/4/22 by DW
 exports.visitAll = visitAll; //3/18/22 by DW
 exports.expandIncludes = expandIncludes; //5/11/22 by DW
 exports.readOutline = readOutline; //10/25/22 by DW
+exports.outlineToPlaintext = outlineToPlaintext; //12/8/25 by DW
 
 const utils = require ("daveutils");
 const opmltojs = require ("opmltojs");
@@ -281,6 +282,28 @@ function outlineToMarkdown (theOutline) { //1/3/22 by DW
 	//addAtts (theOutline.opml.head);
 	dolevel (theOutline.opml.body)
 	return (mdtext);
+	}
+function outlineToPlaintext (theOutline) {  //12/8/25 by DW
+	//Changes
+		//12/7/25; 10:29:02 AM by DW
+			//I just want to pull the source code out of the outline, no html, no markdown. 
+	var plaintext = "", indentlevel = 0;
+	function add (s) {
+		plaintext += filledString ("\t", indentlevel) + s + "\n";
+		}
+	function dolevel (theNode) {
+		theNode.subs.forEach (function (sub) {
+			add (sub.text);
+			if (sub.subs !== undefined) {
+				indentlevel++;
+				dolevel (sub);
+				indentlevel--;
+				}
+			});
+		}
+	dolevel (theOutline.opml.body);
+	//console.log ("outlineToPlaintext: plaintext == " + plaintext);
+	return (plaintext);
 	}
 
 function httpRequest (url, callback) {

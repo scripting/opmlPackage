@@ -1,3 +1,7 @@
+#### 12/8/25; 9:28:07 AM by DW
+
+Added outlineToPlaintext to client/opml.js and opmlpackage.js.
+
 #### 12/9/24; 9:21:04 AM by DW
 
 Under some circumstances, sourcestruct in the parse routine will be undefined, so we check for it instead of crashing.

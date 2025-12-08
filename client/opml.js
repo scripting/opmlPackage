@@ -206,6 +206,28 @@ function outlineToMarkdown (theOutline) {  //1/3/22 by DW
 	dolevel (theOutline.opml.body)
 	return (mdtext);
 	}
+function outlineToPlaintext (theOutline) {  //12/8/25 by DW
+	//Changes
+		//12/7/25; 10:29:02 AM by DW
+			//I just want to pull the source code out of the outline, no html, no markdown. 
+	var plaintext = "", indentlevel = 0;
+	function add (s) {
+		plaintext += filledString ("\t", indentlevel) + s + "\n";
+		}
+	function dolevel (theNode) {
+		theNode.subs.forEach (function (sub) {
+			add (sub.text);
+			if (sub.subs !== undefined) {
+				indentlevel++;
+				dolevel (sub);
+				indentlevel--;
+				}
+			});
+		}
+	dolevel (theOutline.opml.body);
+	//console.log ("outlineToPlaintext: plaintext == " + plaintext);
+	return (plaintext);
+	}
 
 function opmlParse (opmltext) {
 	//Changes
